@@ -13,9 +13,13 @@ class QueryMaker:
         :return: tuple (query_string, value_tuple) where query_string is the final query for use with the connection
         and value_tuple is the tuple of values to use in the execute method and replace the placeholders in the query.
         """
+
+        if filters:
+            filters['name'] = filters.pop('status', None)
+
         final_filters = [f'{key} = %s' for key, value in filters.items() if value is not None]
 
-        result = 'WHERE ' + ' AND '.join(final_filters + ["st.name IN %s"])
+        result = 'WHERE ' + ' AND '.join(final_filters + ["st.name IN (%s, %s, %s)"])
 
         query = f"""
             SELECT pr.address, pr.city, st.name AS status, pr.price as sale_price, pr.description
@@ -30,7 +34,7 @@ class QueryMaker:
             {result};
         """
 
-        values = tuple(list(filters.values()) + [('pre_venta', 'en_venta', 'vendido')])
+        values = tuple(list(filters.values()) + ['pre_venta', 'en_venta', 'vendido'])
 
         return query, values
 
@@ -38,7 +42,11 @@ class QueryMaker:
 if __name__ == '__main__':
     query_maker = QueryMaker()
 
-    test_filters = {'pr.year': 2021, 'pr.city': 'bogota', 'st.name': 'en_venta'}
+    test_filters = {
+        "year": 2021,
+        "city": "bogota",
+        "status": "en_venta"
+    }
 
     test_query, test_values = query_maker.get_query(test_filters)
     print(f'Query result: {test_query}')
