@@ -1,8 +1,15 @@
-from http.server import HTTPServer
-from app.habi_properties_query.server import Handler, HOST, PORT
+from app.habi_properties_query.server import run_server
 
 if __name__ == '__main__':
-    with HTTPServer((HOST, int(PORT)), Handler) as server:
-        print(f'Starting server on: {HOST}:{PORT}')
-        server.serve_forever()
 
+    try:
+        run_server()
+
+    except ValueError:
+        print(
+            "Server declaration error. Please verify your .env file and try again. If the problem persist, "
+            "contact with the developer."
+        )
+
+    except Exception as e:
+        print(f"An unexpected error was encountered. Details: {e}")
