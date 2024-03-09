@@ -19,7 +19,7 @@ class QueryMaker:
 
         final_filters = [f'{key} = %s' for key, value in filters.items() if value is not None]
 
-        result = 'WHERE ' + ' AND '.join(final_filters + ["st.name IN (%s, %s, %s)"])
+        result = 'WHERE ' + ' AND '.join(final_filters + ["st.name IN (%s, %s, %s) AND price > 0"])
 
         query = f"""
             SELECT pr.address, pr.city, st.name AS status, pr.price as sale_price, pr.description
