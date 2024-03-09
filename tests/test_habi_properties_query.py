@@ -1,6 +1,6 @@
 import pytest
 import threading
-from app.habi_properties_query import server
+from app.habi_properties_query.server import run_server
 import requests
 from dotenv import load_dotenv
 import os
@@ -17,7 +17,7 @@ def fixture_server():
     This fixture server will be used for generate and isolated environment for 'deploy and run' our API service.
     Doing this will garantee an execution of the API service until it reaches the expected results in the tests.
     """
-    fake_server = threading.Thread(target=server)
+    fake_server = threading.Thread(target=run_server)
     fake_server.daemon = True
     fake_server.start()
 

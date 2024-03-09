@@ -79,7 +79,24 @@ class Handler(SimpleHTTPRequestHandler):
             self.wfile.write(f'Error en la solicitud realizada. Detalle: {e}'.encode('utf-8'))
 
 
+def run_server():
+    """
+    Runs the server and closes when its needed. It uses the static variables HOST and PORT defined through the .env
+    values for a more customizable experience using this server.
+    :return:
+    """
+    api_server = HTTPServer((HOST, int(PORT)), Handler)
+    print(f'Starting server on: {HOST}:{PORT}')
+
+    try:
+        api_server.serve_forever()
+
+    except KeyboardInterrupt:
+        pass
+
+    api_server.server_close()
+    print('Server closed succesfully')
+
+
 if __name__ == '__main__':
-    with HTTPServer((HOST, int(PORT)), Handler) as server:
-        print(f'Starting server on: {HOST}:{PORT}')
-        server.serve_forever()
+    run_server()
