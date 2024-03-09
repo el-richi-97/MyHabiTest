@@ -19,7 +19,7 @@ class Handler(SimpleHTTPRequestHandler):
     """
 
     @staticmethod
-    def response_maker(request_body: str) -> str:
+    def query_response_body_maker(request_body: str) -> str:
         """
         This method is responsible for generating the response for the POST method of this microservice. It works
         getting the request body sent by the user and use it to generate a SQL query, the data needed to be sent
@@ -53,6 +53,45 @@ class Handler(SimpleHTTPRequestHandler):
                 "No se pudo establecer conexión con la base de datos, verifique sus credenciales de acceso."
             )
 
+    def send_custom_response(self, code: int, message: str, headers: dict) -> None:
+        """
+        This method is responsible for setting all the params for the response of all requests. This will be
+        useful to easily retrieve the respone to the user with just few params
+
+        :param code: int. The HTTP response code desired for the response
+        :param message: str. The body of the response that you want to send in the response
+        :param headers: dict. The headers of the response, you always need to sent the keyword and the value for the
+        headers using the dictionary keys.
+        """
+
+        self.send_response(code)
+        self.send_header(headers['keyword'], headers['value'])
+        self.end_headers()
+        self.wfile.write(message.encode('utf-8'))
+
+    def do_GET(self):
+        if self.path == '/':
+            self.send_custom_response(
+                code=200,
+                message="Bienvenido a mi API. Para consultar propiedades usa el endpoint /get_properties",
+                headers={'keyword': 'Content-type', 'value': 'text/plain'}
+            )
+
+        elif self.path == '/get_properties':
+            self.send_custom_response(
+                code=405,
+                message="Método no permitido. Para usar el endpoint /get_properties asegurate de que la petición sea "
+                        "POST",
+                headers={'keyword': 'Content-type', 'value': 'text/plain'}
+            )
+
+        else:
+            self.send_custom_response(
+                code=404,
+                message="La Ruta especificada no existe, para realizar la búsquedad de propiedades use /get_properties",
+                headers={'keyword': 'Content-type', 'value': 'text/plain'}
+            )
+
     def do_POST(self):
         """
         This method is responsible for send an HTTP POST response to the user with te information requested.
@@ -64,19 +103,21 @@ class Handler(SimpleHTTPRequestHandler):
         body = self.rfile.read(content_length).decode('utf-8')
 
         try:
-            response = self.response_maker(body)
+            response = self.query_response_body_maker(body)
 
             if self.path == '/get_properties':
-                self.send_response(200)
-                self.send_header('Content-type', 'application/json')
-                self.end_headers()
-                self.wfile.write(response.encode('utf-8'))
+                self.send_custom_response(
+                    code=200,
+                    message=response,
+                    headers={'keyword': 'Content-type', 'value': 'application/json'}
+                )
 
         except Exception as e:
-            self.send_response(400)
-            self.send_header('Content-type', 'text/plain')
-            self.end_headers()
-            self.wfile.write(f'Error en la solicitud realizada. Detalle: {e}'.encode('utf-8'))
+            self.send_custom_response(
+                code=400,
+                message=f'Error en la solicitud realizada. Detalle: {e}',
+                headers={'keyword': 'Content-type', 'value': 'text/plain'}
+            )
 
 
 def run_server():

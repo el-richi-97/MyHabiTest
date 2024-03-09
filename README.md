@@ -126,8 +126,17 @@ Teniendo todo listo, la ejecución del proyecto se podrá hacer, posicionandose 
 el comando `python main.py`
 
 tendremos que acceder a la URL formada por el host y port definidos en las variables de entorno y a la ruta asignada
-para el consumo de la API. Para un ejemplo 
-rápído: `http://localhost:8000/get_properties`. COMENTARIO ADICIONAL: Las pruebas de ejecución al momento del 
+para el consumo de la API, la cual es:
+
+```
+/get_properties
+```
+
+El método para consumir la API debe de ser POST, debido a que contiene un cuerpo de petición, las buenas prácticas
+indican que para este tipo de casos se debe realizar la petición si o si por medio de método
+POST.
+
+Para un ejemplo rápído: `http://localhost:8000/get_properties`. COMENTARIO ADICIONAL: Las pruebas de ejecución al momento del 
 desarrollo, se realizaron por medio de postman.
 
 ![Esquema](misc/postman_sample_result.png)
