@@ -55,6 +55,9 @@ durante el desarrollo de este primer ejercicio de la prueba técnica.
 Para el desarrollo del ejercicio 1, para el desarrollo de microservicios se
 utilizarán las siguientes tecnologías:
 
+* *Git:* Indispensable para acceder al repositorio, clonarlo y en caso de ser necesario
+interactuar con el.
+
 * *Python v3.9.6:* Se escogió esta versión de Python para garantizar estabilidad
 y mantenimiento a mediano/largo plazo para este desarrollo. Por el lado de Python,
 este lenguaje es mandatorio para el desarrollo de esta prueba.
@@ -85,13 +88,19 @@ Específicamente para el proceso de generar la conexión al API fixture y realiz
 
 Por favor seguir las indicaciones de uso de este servicio para garantizar su correcto funcionamiento:
 
-1. Posicionate en la carpeta donde deseas clonar el repositorio.
-2. Clona el repositorio: https://github.com/el-richi-97/MyHabiTest.git
-3. Accede al interior de la carpeta que obtienes al clonar el repositorio, para esto puedes
-usar el comando: `cd <nombre_carpeta>`
-4. Necesitas crear un entorno virtual. Con virtualenv puedes hacerlo así: `python -m venv mi-entorno`
+1. Posicionate en la carpeta donde deseas clonar el repositorio, o puedes crear una si no cuentas 
+con algúna carpeta de proyectos Python, no existe inconveniente algúno.
+2. Clona el repositorio: https://github.com/el-richi-97/MyHabiTest.git. Para este paso, debes contar con 
+GIT instalado en el sistema.
+3. Accede al interior de la carpeta "MyHabiTest" que obtienes al clonar el repositorio, para esto puedes
+usar el comando: `cd MyHabiTest` o simplemente accediendo la carpeta desde la GUI de tu sistema.
+4. Necesitas crear un entorno virtual. Con virtualenv puedes hacerlo así: `python -m venv mi-entorno`. 
+Para esto, ya debes contar con Python instalado en tu equipo. Recomendación: Si es posible, abre tu IDE
+de preferencia y usa la terminal desde el IDE, para hacer esta y las demás acciones directamente desde 
+el proyecto abierto.
 5. Luego de creado el entorno virtual se activa usando el comando en macOS/Linux: 
-`source mi-entorno/bin/activate` o en Windows: `mi-entorno\Scripts\activate`
+`source mi-entorno/bin/activate` o en Windows: `mi-entorno\Scripts\activate`. Si este queda activado
+correctamente, verás que antes de la ruta en la consola, aparecerá entre paréntesis el nombre del entorno.
 6. En bien el entorno virtual esté creado, es requerido instalar requerimientos, se hace con 
 el comando: `pip install -r requirements.txt` dentro de la terminal
 7. Es necesario instanciar las variables de entorno, se puede hacer creando un archivo llamado 
