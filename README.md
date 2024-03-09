@@ -4,6 +4,12 @@
 
 ## Introducción
 
+**Nombre del dev: Ricardo Quintana**
+
+**Cargo al que aspira: Ssr backend developer**
+
+**Para que empresa: Habi**
+
 Este repositorio tiene como objetivo entregar los resultados de las pruebas 
 de desarrollo requeridas para continuar en el proceso de selección para el
 cargo de Ssr backend developer en Habi. En su contenido, se encontrarán las
@@ -11,7 +17,22 @@ soluciones de ambos ejercicios planteados en el documento de prueba y
 organzados de la forma más orgánica posible para asemejar el posible 
 repositorio de un proyecto real y común.
 
-## Ejercicio 1: Servicio de consultas y likes 
+## Contenido
+
+- [Introducción](#introducción)
+- [Contenido](#contenido)
+- [Ejercicio 1: Servicio de consultas y likes](#ejercicio-1-servicio-de-consultas-y-likes-)
+  - [(a) Tecnologías y recursos para servicio de consultas](#a-tecnologías-y-recursos-para-servicio-de-consultas)
+  - [(a) Instalación del proyecto del servicio de consultas](#a-instalación-del-proyecto-del-servicio-de-consultas)
+  - [(a) Ejecución y uso del servicio de consultas](#a-ejecución-y-uso-del-servicio-de-consultas)
+  - [(a) Pruebas unitarias](#a-pruebas-unitarias)
+  - [(b) Propuesta de servicio para likes a propiedades, expansión de modelo de datos](#b-propuesta-de-servicio-para-likes-a-propiedades-expansión-de-modelo-de-datos)
+  - [(c) Posibles puntos de mejora adicionales](#c-posibles-puntos-de-mejora-adicionales)
+  - [(d) Dudas o stoppers encontrados y resueltos durante el desarrollo](#d-dudas-o-stoppers-encontrados-y-resueltos-durante-el-desarrollo)
+- [Ejercicio 2: Sorting y agrupado de listas a.k.a "sorting game"](#ejercicio-2-sorting-y-agrupado-de-listas-aka-sorting-game-)
+  - [Notas relevantes](#notas-relevantes)
+
+## Ejercicio 1: Servicio de consultas y likes 🔍💜
 
 A continuación se desarrollan los dos requerimientos de crear un servicio práctico para consultas de propiedades
 y también el ejercicio de proposición de un modelo para gestionar un hipotetico servicio de "likes" de propiedades
@@ -174,7 +195,7 @@ CREATE TABLE user_properties_likes (
 
 Ahora, el modelo entidad relación para esta implementación sería el siguiente:
 
-![Esquema](misc/habi%20eerr%20v1.drawio.png)
+![Esquema BBDD](misc/habi%20eerr%20v1.drawio.png)
 
 <hr>
 
@@ -199,7 +220,7 @@ ON DELETE SET NULL para evitar falencias con la data.
 
 El diagrama resultante con estas pequeñas modificaciones sería el siguiente:
 
-![Esquema](misc/habi%20eerr%20v2.drawio.png)
+![Esquema BBDD con propuestas de mejoras](misc/habi%20eerr%20v2.drawio.png)
 
 <hr>
 
@@ -260,3 +281,26 @@ cuidando la integridad de los tipos de datos de dichos filtros?
 
 <hr>
 
+## Ejercicio 2: Sorting y agrupado de listas a.k.a "sorting game" 🎲
+
+Bauticé mi desarrollo de este ejercicio como sorting game, ya que no tenía nombre concreto en el documento de la prueba.
+El desarrollo de este ejercicio planteando primero una solución y luego de ver que se podía mejorar (porque el archivo
+es entendible, pero se nota que podia tratar de mejorarse) no reemplacé la función realizada sino que propuse la primera
+versión y una nueva, como para mirar alternativas de desarrollo y sobretodo, demostrar como puede evolucionar una 
+implementación de software.
+
+### Notas relevantes
+Destaco las siguientes notas del desarrollo de esta solución:
+
+* La implementación de esta solución está en [sorting/sorting_game.py](sorting/sorting_game.py).
+* Se hicieron pruebas unitarias, están en [tests/test_sorting_game.py](tests/test_sorting_game.py).
+* El detalle de como funcionan los métodos y el proceso realizado, se encuentra en la documentación de cada método
+en el archivo .py del desarrollo. Además, explico también el "por que" de un método v2.
+* El ejercicio y las pruebas se hicieron en base a las propias listas y resultados planteados en el documento.
+* Además, plantié una lista más para probar, distintas a las de ejemplo e hice también una lista aleatoria grande
+para probar ambos métodos diseñados.
+* Las pruebas si las hice unicamente basandome en las listas y resultados del documento, probando ambos métodos.
+
+No era necesario pero adjunto una imágen de una ejecución directa del archivo sorting_game.py:
+
+![Resultados de ejecución de "sorting game"](misc/results_of_sorting_game.jpeg)
