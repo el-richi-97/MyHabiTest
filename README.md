@@ -96,6 +96,8 @@ cuidando la integridad de los tipos de datos de dichos filtros?
 
 ## Instrucciones de uso e instalación
 
+### Instalación del proyecto
+
 Por favor seguir las indicaciones de uso de este servicio para garantizar su correcto funcionamiento:
 
 1. Posicionate en la carpeta donde deseas clonar el repositorio.
@@ -122,8 +124,29 @@ SERVICE_HOST=<<dirección donde montar el servicio, por defecto localhost>>
 SERVICE_PORT=<<puerto donde montar el servicio, por defecto 8000>>
 ```
 
-8. Teniendo todo listo, la ejecución del proyecto se podrá hacer simplemente con el comando
+
+### Ejecución y uso
+
+Teniendo todo listo, la ejecución del proyecto se podrá hacer simplemente con el comando
 `python main.py`
+
+tendremos que acceder a la URL formada por el host y port definidos en las variables de entorno y a la ruta asignada
+para el consumo de la API. Para un ejemplo 
+rápído: `http://localhost:8000/get_properties`. NOTA: Las pruebas y ejecuciones se realizaron por medio de postman.
+
+![Esquema](misc/postman_sample_result.png)
+
+Para el uso de los filtros, se debe usar el siguiente esquema de request body bajo formato JSON:
+
+```json
+{
+    "year": 2021,
+    "city": "bogota",
+    "status": "en_venta"
+}
+```
+
+Tanto cada uno de los campos como la totalidad del request body son opcionales para el uso del servicio.
 
 <hr>
 
